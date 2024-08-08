@@ -1,0 +1,44 @@
+  /* Animasyon için gerekli CSS */
+  @keyframes typing {
+    from { width: 0; }
+    to { width: 100%; }
+  }
+  
+  @keyframes blink-caret {
+    from, to { border-color: transparent; }
+    50% { border-color: #101f59; }
+  }
+  
+  /* Harf harf yazma animasyonu */
+  #animated-text {
+    overflow: hidden; /* Metnin dışına taşan kısımları gizler */
+    border-right: .15em solid #101f59; /* Simüle edilen yazı yazma imleci */
+    white-space: nowrap; /* Yazıyı tek satırda tutar */
+    letter-spacing: .15em; /* Harfler arası boşluk */
+    animation:
+      typing 0.5s steps(40, end),
+      blink-caret 0.75s step-end infinite;
+  }
+  
+  /* Metnin tamamının gözükmesi */
+  #animated-text::after {
+    content: "|";
+    animation: blink-caret 0.75s step-end infinite;
+  }
+  
+  /* Metnin tamamının gözükmesinden sonraki durum */
+  #animated-text.complete::after {
+    content: "";
+    animation: none;
+  }
+  
+  /* Metnin tamamı 5 saniye boyunca sabit kalacak */
+  @keyframes hold {
+    0%, 100% { opacity: 1; }
+    20%, 80% { opacity: 0; }
+  }
+  #animated-text.complete {
+    animation: hold 5s infinite;
+    animation-delay: 5s;
+    border-right: none; /* Animasyon tamamlandığında simüle edilen imleci kaldır */
+  }
